@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pink Heart Animation</title>
+    <!-- Brython libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/brython@3.10.6/brython.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/brython@3.10.6/brython_stdlib.js"></script>
+    <style>
+        body {
+            margin: 0;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        canvas {
+            background-color: black;
+        }
+    </style>
+</head>
+<body onload="brython()">
+
+    <canvas id="turtle-canvas" width="800" height="800"></canvas>
+
+    <script type="text/python">
+        import browser
+        import turtle
+        import math
+
+        # Force canvas initialization immediately on load
+        canvas = browser.document["turtle-canvas"]
+        turtle.set_canvas(canvas)
+
+        screen = turtle.Screen()
+        screen.bgcolor("black")
+
+        t = turtle.Turtle()
+        t.speed(0) # Set to max speed so it renders instantly and cleanly on first try
+        t.hideturtle()
+        t.penup()
+        t.color("#ffb6c1")
+
+        # Exact logic from the first image
+        for scale in range(11, 17):
+            for i in range(120):
+                angle = i * (math.pi * 2) / 120
+                x = 16 * (math.sin(angle) ** 3) * scale
+                y = (13 * math.cos(angle) - 5 * math.cos(2 * angle) - 2 * math.cos(3 * angle) - math.cos(4 * angle)) * scale
+                t.goto(x, y)
+                t.write("I love you", align="center", font=("Arial", 8, "bold"))
+
+        turtle.done()
+    </script>
+
+</body>
+</html>
